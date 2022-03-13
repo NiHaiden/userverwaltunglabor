@@ -41,7 +41,7 @@ public record DatabaseInit(UserRepository userRepository,
         if (userRepository.count() <= 0) {
             List<User> userList = new ArrayList<>(List.of(
                     new User("niklas@haiden.ch", passwordEncoder.encode("Niklas12"), Roles.ADMIN, new HashSet<>()),
-                    new User("simon@wolffhardt.io", passwordEncoder.encode("Simon12"), Roles.USER, new HashSet<>()),
+                    new User("simon@wolf.io", passwordEncoder.encode("Simon12"), Roles.USER, new HashSet<>()),
                     new User("fabian@weichsl.xyz", passwordEncoder.encode("Weichsl12"), Roles.USER, new HashSet<>()),
                     new User("max@max.io", passwordEncoder.encode("Max12"), Roles.USER, new HashSet<>())
             ));
