@@ -50,11 +50,11 @@ public record DatabaseInit(UserRepository userRepository,
 
             if (antwortRepository.count() <= 0) {
                 antwortRepository.saveAll(List.of(
-                        new Antwort(null, userList.get(0), fragenListe.get(0), Antwortmoeglichkeiten.VolleZustimmung,
+                        new Antwort(null, userList.get(3), fragenListe.get(0), Antwortmoeglichkeiten.VolleZustimmung,
                                 LocalDateTime.of(2021, 1, 10, 10, 0)),
                         new Antwort(null, userList.get(1), fragenListe.get(0), Antwortmoeglichkeiten.VolleZustimmung,
                                 LocalDateTime.of(2021, 1, 10, 4, 0)),
-                        new Antwort(null, userList.get(0), fragenListe.get(1), Antwortmoeglichkeiten.VolleZustimmung,
+                        new Antwort(null, userList.get(2), fragenListe.get(1), Antwortmoeglichkeiten.VolleZustimmung,
                                 LocalDateTime.of(2022, 02, 10, 15, 19))
                 ));
             }

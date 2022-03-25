@@ -88,7 +88,7 @@
        th:href="@{/logout}">Logout</a>
 </nav>
 <div class="container hello-container">
-   <form th:action="@{/newanswer}" method="post" th:object="${answer}">
+   <form th:action="@{/newanswer}" method="post" th:object="${antwort}">
        <h1 th:text="${currentQ.getUeberschrift()}"></h1>
        <p th:text="${currentQ.getFragetext()}"></p>
 
@@ -97,7 +97,7 @@
                   th:text="${option.getAntwort()}" name="option">
        </div>
 
-       <span class="text-danger" th:if="${#fields.hasErrors('gewaehlteOption')}" th:errors="*{gewaehlteOption}"></span>
+       <span class="text-danger" th:if="${#fields.hasErrors('gewaehlteOption')}" th:errors="*{gewaehlteOption}"></span><br>
        <input type="hidden" name="questionID" th:value="${currentQ.getId()}">
        <input class="btn btn-primary" type="submit" value="Antwort absenden">
    </form>

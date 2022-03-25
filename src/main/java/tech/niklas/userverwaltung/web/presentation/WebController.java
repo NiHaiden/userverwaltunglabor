@@ -62,10 +62,24 @@ public class WebController {
             throw new IllegalArgumentException("Frage wurde nicht gefunden!");
         });
 
+        User user = userRepository.findByEmail(authentication.getName()).orElseThrow(() -> {
+            throw new IllegalArgumentException("User wurde nicht gefunden!");
+        });
+
+        if(frage.getAblaufdatum().isBefore(LocalDate.now())) {
+            return "redirect:/error";
+        }
+
+        if(antwortRepository.findAntwortByFrageAndUser(frage, user).isPresent()) {
+            throw new IllegalArgumentException("Antwort wurde bereits recorded!");
+        }
+
+
+
         model.addAttribute("usermail", authentication.getName());
         model.addAttribute("currentQ", frage);
         model.addAttribute("options", Antwortmoeglichkeiten.values());
-        model.addAttribute("answer", new Antwort());
+        model.addAttribute("antwort", new Antwort());
 
         return "answer_question";
     }
@@ -133,13 +147,13 @@ public class WebController {
     @PostMapping("/newanswer")
     public String saveAnswer(@RequestParam(name = "questionID") Integer questionID, @Valid Antwort antwort, BindingResult bindingResult
     , Model model, Authentication authentication){
+        System.out.println(antwort);
         Frage frage = frageRepository.findById(questionID).orElseThrow(() -> {
             throw new IllegalArgumentException("Frage wurde nicht gefunden!");
         });
 
-
-
         if(bindingResult.hasErrors()) {
+            System.out.println(antwort);
             model.addAttribute("usermail", authentication.getName());
             model.addAttribute("currentQ", frage);
             model.addAttribute("options", Antwortmoeglichkeiten.values());
